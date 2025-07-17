@@ -4,29 +4,35 @@ import Footer from "./components/Footer"
 import Header from "./components/Header"
 import Home from "./components/Home"
 import Projects from "./components/Projects"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { useEffect } from "react"
+import Map from "./components/Map"
 import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useGSAP } from "@gsap/react"
+import 'leaflet/dist/leaflet.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 function App() {
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+  useGSAP(() => {
     const sections = gsap.utils.toArray<HTMLElement>("section");
-    sections.forEach((section, i) => {
-      gsap.fromTo(
-        section,
-        { opacity: 0, y: 50 },
+    sections.forEach((section) => {
+      gsap.fromTo(section,
+        { opacity: 0,
+          y: 50,
+          scale: 0.8
+        },
         {
           opacity: 1,
           y: 0,
-          duration: 1,
-          delay: i * 0.1,
-          ease: "power2.out",
+          scale: 1,
+          ease: "power2.inOut",
           scrollTrigger: {
-            trigger: section,
-            start: "top 80%",
-            toggleActions: "restart none none none",
-          },
+          trigger: section,
+          start: "top 90%",         // when section top hits 80% of viewport
+          end: "bottom 10%",        // when bottom reaches 20% of viewport
+          toggleActions: "play reverse play reverse",  // replays when scrolling back
+          once: false,              // ensures it works both ways
+        },
         }
       );
     });
@@ -39,6 +45,7 @@ function App() {
           <Home />
           <Projects />
           <About />
+          <Map />
           <Contact />
           <Footer />
         </main>

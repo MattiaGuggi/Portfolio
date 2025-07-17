@@ -15,8 +15,9 @@ const Header = () => {
       <nav className="flex gap-8 text-indigo-700 font-medium">
         <a href="#home" onClick={e => handleNavClick(e, "home")}>Home</a>
         <a href="#projects" onClick={e => handleNavClick(e, "projects")}>Projects</a>
-        <a href="#contact" onClick={e => handleNavClick(e, "contact")}>Contact</a>
+        <a href="#map" onClick={e => handleNavClick(e, "map")}>Map</a>
         <a href="#about" onClick={e => handleNavClick(e, "about")}>About</a>
+        <a href="#contact" onClick={e => handleNavClick(e, "contact")}>Contact</a>
       </nav>
     </header>
   )
