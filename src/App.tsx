@@ -15,24 +15,26 @@ gsap.registerPlugin(ScrollTrigger);
 function App() {
   useGSAP(() => {
     const sections = gsap.utils.toArray<HTMLElement>("section");
+
     sections.forEach((section) => {
-      gsap.fromTo(section,
-        { opacity: 0,
-          y: 50,
+      gsap.fromTo(
+        section,
+        {
+          opacity: 0,
+          y: 80,
           scale: 0.8
         },
         {
           opacity: 1,
           y: 0,
           scale: 1,
-          ease: "power2.inOut",
+          ease: "power2.out",
           scrollTrigger: {
-          trigger: section,
-          start: "top 90%",         // when section top hits 80% of viewport
-          end: "bottom 10%",        // when bottom reaches 20% of viewport
-          toggleActions: "play reverse play reverse",  // replays when scrolling back
-          once: false,              // ensures it works both ways
-        },
+            trigger: section,
+            start: "top 95%",   // start when top is just entering viewport
+            end: "bottom 80%",  // end when bottom is mostly in view
+            scrub: 0.5,         // smooth interpolation
+          },
         }
       );
     });
@@ -40,7 +42,7 @@ function App() {
 
   return (
     <>
-      <main className="min-h-screen flex flex-col bg-gradient-to-br from-indigo-50 to-indigo-200">
+      <main className="min-h-screen w-full flex flex-col bg-gradient-to-br from-indigo-50 to-indigo-200">
           <Header />
           <Home />
           <Projects />

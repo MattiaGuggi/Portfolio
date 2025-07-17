@@ -6,8 +6,8 @@ const Map = () => {
     const position: LatLngExpression = [45.87, 9.12];
 
     return (
-        <section id="map" className="min-h-[40vh] flex flex-col items-center justify-center px-4">
-            <div className="w-1/3 md:w-1/2 h-96 mx-auto border border-indigo-200 rounded-xl overflow-hidden shadow-lg">
+        <section id="map" className="min-h-[40vh] w-full flex flex-col items-center justify-center xs:px-4 px-14">
+            <div className="w-full max-w-5xl mx-auto h-[500px] border border-indigo-200 rounded-xl overflow-hidden shadow-lg">
                 <MapContainer
                     center={position}
                     zoom={10}
