@@ -2,6 +2,11 @@ import { useRef, useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import React from "react";
 import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/all";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,10 +16,23 @@ const Header = () => {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, type: string) => {
     e.preventDefault();
     const section = document.getElementById(type);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-      setIsOpen(false);
-    }
+    if (!section) return;
+
+    section.style.scrollMargin = '180px';
+    section.scrollIntoView({ behavior: 'smooth' });
+    gsap.to(window, {
+      duration: 1,
+      scrollTo: {
+        y: section,
+        offsetY: 70,
+      },
+      ease: "power2.inOut",
+      onComplete: () => {
+        setIsOpen(false);
+        ScrollTrigger.refresh();
+      },
+      overwrite: "auto",
+    });
   };
 
   // Detect desktop view
@@ -61,6 +79,14 @@ const Header = () => {
       }
     }
   }, [isOpen]);
+
+  
+  useGSAP(() => {
+    gsap.fromTo("header",
+      { opacity: 0 },
+      { opacity: 1, duration: 1.5, ease: "power2.out", }
+    );
+  }, []);
 
   return (
     <header className="px-8 py-6 shadow-lg flex items-center justify-between bg-white/80 backdrop-blur border-b border-indigo-200 relative z-50">

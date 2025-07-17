@@ -1,13 +1,10 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useRef } from "react";
 
 const Projects = () => {
-  const ulRef = useRef<HTMLUListElement>(null);
-
+  const items = gsap.utils.toArray<HTMLElement>("section#projects li");
+  
   useGSAP(() => {
-    const items = gsap.utils.toArray<HTMLElement>("section#projects li");
-
     items.forEach((item) => {
       gsap.fromTo(item, {
           opacity: 0,
@@ -35,7 +32,7 @@ const Projects = () => {
       <div className="mx-auto text-center">
         <h2 className="text-3xl font-bold text-indigo-700 mb-4">Projects</h2>
         <p className="text-indigo-900 mb-8">A selection of my work, built with modern technologies and a focus on efficiency and design.</p>
-        <ul ref={ulRef} className="grid grid-cols-4 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-12">
+        <ul className="grid grid-cols-4 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-12">
           <li className="bg-white/80 rounded-xl shadow-custom p-6 text-left cursor-pointer duration-400 transition-all hover:scale-105">
             <span className="text-xl font-semibold text-indigo-800">Spotify Dashboard</span>
             <p className="text-indigo-900">A React dashboard for Spotify analytics and insights based on a python server.</p>

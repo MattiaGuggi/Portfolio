@@ -3,13 +3,30 @@ import gsap from "gsap";
 
 const Home = () => {
   useGSAP(() => {
-    gsap.to(".animated-char", {
+    const tl = gsap.timeline();
+
+    tl.fromTo("#home",
+      {
+        opacity: 0,
+        y: 50,
+        scale: 0.8,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 1,
+        ease: "power2.out",
+      }
+    );
+
+    tl.to(".animated-char", {
       opacity: 1,
       y: 0,
       stagger: 0.05,
       duration: 0.5,
       ease: "power2.out",
-    });
+    }, "-=0.4"); // start overlapping with previous animation
   }, []);
 
   return (
@@ -51,9 +68,7 @@ const Home = () => {
         </a>
       </div>
 
-      {/* Optional Image or Lottie placeholder */}
       <div className="w-full max-w-xl h-[300px] bg-indigo-100 rounded-xl shadow-inner flex items-center justify-center text-indigo-400 text-xl">
-        {/* Replace with image, animation, or hero SVG */}
         (Image or animation placeholder)
       </div>
     </section>

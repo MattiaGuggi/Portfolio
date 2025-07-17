@@ -1,7 +1,6 @@
 import { Download } from "lucide-react";
 
-const About = () => {
-  return (
+const About = () => {return (
     <section id="about" className="min-h-[40vh] flex flex-col items-center justify-center px-14 xs:px-4">
       <div className="max-w-2xl mx-auto text-center mb-7">
           <h2 className="text-3xl font-bold text-indigo-700 mb-4">About Me</h2>
@@ -28,7 +27,7 @@ const About = () => {
         download="MattiaGuggi_Resume.pdf"
         target="_blank"
         rel="noopener"
-        className="cursor-pointer mb-10 transition-all flex duration-400 hover:scale-105 px-8 py-4 rounded-lg bg-indigo-700 text-white font-semibold hover:bg-indigo-800"
+        className="cursor-pointer mb-20 transition-all flex duration-400 hover:scale-105 px-8 py-4 rounded-lg bg-indigo-700 text-white font-semibold hover:bg-indigo-800"
       >
         <Download />Download My Resume
       </a>
