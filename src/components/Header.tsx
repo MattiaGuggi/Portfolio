@@ -18,8 +18,8 @@ const Header = () => {
     const section = document.getElementById(type);
     if (!section) return;
 
-    section.style.scrollMargin = '180px';
-    section.scrollIntoView({ behavior: 'smooth' });
+    section.style.scrollMargin = "180px";
+    section.scrollIntoView({ behavior: "smooth" });
     gsap.to(window, {
       duration: 1,
       scrollTo: {
@@ -80,22 +80,58 @@ const Header = () => {
     }
   }, [isOpen]);
 
-  
   useGSAP(() => {
-    gsap.fromTo("header",
+    gsap.fromTo(
+      "header",
       { opacity: 0 },
-      { opacity: 1, duration: 1.5, ease: "power2.out", }
+      { opacity: 1, duration: 1.5, ease: "power2.out" }
     );
   }, []);
 
   return (
-    <header className="px-8 py-6 shadow-lg flex items-center justify-between bg-white/80 backdrop-blur border-b border-indigo-200 relative z-50">
-      <span className="text-2xl font-bold text-indigo-700 tracking-tight">Mattia Guggi</span>
+    <header
+      className="
+        px-8 py-6 flex items-center justify-between
+        bg-white/80 backdrop-blur border-b border-indigo-200
+        shadow-lg
+        relative z-50
+        transition-shadow transition-colors duration-300
+        hover:shadow-xl
+        hover:bg-white/95
+        rounded-b-lg
+      "
+    >
+      <span
+        className="
+          text-2xl font-bold text-indigo-700 tracking-tight
+          select-none
+          transition-transform duration-300
+          hover:scale-105
+          cursor-default
+        "
+      >
+        Mattia Guggi
+      </span>
 
       {isDesktop ? (
-        <nav className="gap-8 text-indigo-700 font-medium flex">
+        <nav className="flex gap-10 text-indigo-700 font-semibold tracking-wide">
           {["home", "projects", "map", "about", "contact"].map((id) => (
-            <a key={id} href={`#${id}`} onClick={(e) => handleNavClick(e, id)} className="font-bold text-lg">
+            <a
+              key={id}
+              href={`#${id}`}
+              onClick={(e) => handleNavClick(e, id)}
+              className="
+                relative
+                text-lg
+                font-semibold
+                cursor-pointer
+                transition-colors duration-300
+                hover:text-indigo-500
+                before:absolute before:-bottom-1 before:left-0 before:h-0.5
+                before:w-0 before:bg-indigo-500 before:transition-all before:duration-300
+                hover:before:w-full
+              "
+            >
               {id.charAt(0).toUpperCase() + id.slice(1)}
             </a>
           ))}
@@ -104,18 +140,41 @@ const Header = () => {
         <>
           <button
             onClick={() => setIsOpen((prev) => !prev)}
-            className="text-indigo-700 md:hidden"
+            aria-label="Toggle menu"
+            className="
+              text-indigo-700 p-2 rounded-md
+              hover:bg-indigo-100
+              transition-colors duration-300
+              focus:outline-none focus:ring-2 focus:ring-indigo-500
+              active:scale-95
+            "
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
 
           <nav
             ref={dropdownRef}
-            className="absolute top-full left-0 w-full bg-white shadow-md flex-col items-start px-8 py-4 gap-4 text-indigo-700 md:hidden overflow-hidden"
+            className="
+              absolute top-full left-0 w-full bg-white shadow-md
+              flex-col items-start px-8 py-6 gap-6 text-indigo-700 md:hidden
+              overflow-hidden
+              rounded-b-lg
+            "
             style={{ display: "none" }}
           >
             {["home", "projects", "map", "about", "contact"].map((id) => (
-              <a key={id} href={`#${id}`} onClick={(e) => handleNavClick(e, id)} className="font-bold text-lg">
+              <a
+                key={id}
+                href={`#${id}`}
+                onClick={(e) => handleNavClick(e, id)}
+                className="
+                  font-semibold text-lg w-full
+                  cursor-pointer
+                  hover:text-indigo-600
+                  transition-colors duration-300
+                  select-none
+                "
+              >
                 {id.charAt(0).toUpperCase() + id.slice(1)}
               </a>
             ))}
@@ -126,4 +185,4 @@ const Header = () => {
   );
 };
 
-export default Header
+export default Header;

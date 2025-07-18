@@ -5,8 +5,11 @@ const Projects = () => {
   const items = gsap.utils.toArray<HTMLElement>("section#projects li");
   
   useGSAP(() => {
-    items.forEach((item) => {
-      gsap.fromTo(item, {
+    const mm = gsap.matchMedia();
+
+    mm.add("(max-width: 480px)", () => {
+      items.forEach(item => {
+        gsap.fromTo(item, {
           opacity: 0,
           y: 50,
           scale: 0.95,
@@ -19,11 +22,38 @@ const Projects = () => {
           stagger: 0.1,
           scrollTrigger: {
             trigger: item,
-            start: "top 95%",
-            scrub: 0.5
+            start: "top 97%",  // when the top of the item hits the bottom of the viewport
+            end: "top 50%",       // when the top of the item hits the middle of the viewport
+            scrub: 0.5,
+            markers: true
+          }
+        });
+      });
+    });
+
+    mm.add("(min-width: 481px)", () => {
+      items.forEach((item) => {
+        gsap.fromTo(item, {
+            opacity: 0,
+            y: 50,
+            scale: 0.95,
           },
-        }
-      );
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            ease: "power2.out",
+            stagger: 0.1,
+            scrollTrigger: {
+              trigger: item,
+              start: "top 95%",
+              end: "bottom 35%",
+              scrub: 0.5,
+              markers: true
+            },
+          }
+        );
+      });
     });
   }, []);
 

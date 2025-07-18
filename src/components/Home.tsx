@@ -26,7 +26,7 @@ const Home = () => {
       stagger: 0.05,
       duration: 0.5,
       ease: "power2.out",
-    }, "-=0.4"); // start overlapping with previous animation
+    }, "-=0.9"); // start overlapping with previous animation
   }, []);
 
   return (
