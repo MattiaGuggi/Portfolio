@@ -1,100 +1,101 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Projects = () => {
-  const items = gsap.utils.toArray<HTMLElement>("section#projects li");
-  
   useGSAP(() => {
-    const mm = gsap.matchMedia();
+    const items = gsap.utils.toArray<HTMLElement>(".project-item");
 
-    mm.add("(max-width: 480px)", () => {
-      items.forEach(item => {
-        gsap.fromTo(item, {
-          opacity: 0,
-          y: 50,
-          scale: 0.95,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          ease: "power2.out",
-          stagger: 0.1,
-          scrollTrigger: {
+    const getColumns = () => {
+      const width = window.innerWidth;
+      if (width < 425) return 1; // xs
+      if (width < 725) return 2; // sm
+      if (width < 1024) return 2; // md
+      return 4; // default
+    };
+
+    const animateRows = () => {
+      const cols = getColumns();
+      const rows = [];
+
+      // Group items into rows
+      for (let i = 0; i < items.length; i += cols) {
+        rows.push(items.slice(i, i + cols));
+      }
+
+      rows.forEach((row) => {
+        row.forEach((item) => {
+          gsap.set(item, { opacity: 0, y: 50, scale: 0.8 });
+
+          ScrollTrigger.create({
             trigger: item,
-            start: "top 97%",  // when the top of the item hits the bottom of the viewport
-            end: "top 50%",       // when the top of the item hits the middle of the viewport
-            scrub: 0.5,
-            markers: true
-          }
+            start: "top 95%",
+            onEnter: () => {
+              gsap.to(item, {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.4,
+                ease: "power2.out",
+              });
+            },
+            onLeaveBack: () => {
+              gsap.to(item, {
+                opacity: 0,
+                y: 50,
+                scale: 0.8,
+                duration: 0.4,
+                ease: "power2.in",
+              });
+            },
+          });
         });
       });
+    };
+
+    animateRows();
+    window.addEventListener("resize", () => {
+      ScrollTrigger.getAll().forEach(t => t.kill());
+      animateRows();
     });
 
-    mm.add("(min-width: 481px)", () => {
-      items.forEach((item) => {
-        gsap.fromTo(item, {
-            opacity: 0,
-            y: 50,
-            scale: 0.95,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            ease: "power2.out",
-            stagger: 0.1,
-            scrollTrigger: {
-              trigger: item,
-              start: "top 95%",
-              end: "bottom 35%",
-              scrub: 0.5,
-              markers: true
-            },
-          }
-        );
-      });
-    });
+    return () => {
+      ScrollTrigger.getAll().forEach(t => t.kill());
+      window.removeEventListener("resize", animateRows);
+    };
   }, []);
 
   return (
-    <section id="projects" className="min-h-[60vh] w-full flex flex-col items-center justify-center py-10 px-14 xs:px-4">
+    <section
+      id="projects"
+      className="min-h-[60vh] w-full flex flex-col items-center justify-center py-10 px-14 xs:px-4"
+    >
       <div className="mx-auto text-center">
         <h2 className="text-3xl font-bold text-indigo-700 mb-4">Projects</h2>
-        <p className="text-indigo-900 mb-8">A selection of my work, built with modern technologies and a focus on efficiency and design.</p>
+        <p className="text-indigo-900 mb-8">
+          A selection of my work, built with modern technologies and a focus on efficiency and design.
+        </p>
         <ul className="grid grid-cols-4 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-12">
-          <li className="bg-white/80 rounded-xl shadow-custom p-6 text-left cursor-pointer duration-400 transition-all hover:scale-105">
-            <span className="text-xl font-semibold text-indigo-800">Spotify Dashboard</span>
-            <p className="text-indigo-900">A React dashboard for Spotify analytics and insights based on a python server.</p>
-          </li>
-          <li className="bg-white/80 rounded-xl shadow-custom p-6 text-left cursor-pointer duration-400 transition-all hover:scale-105">
-            <span className="text-xl font-semibold text-indigo-800">Bar Service</span>
-            <p className="text-indigo-900">A React App to see all cocktails and create new ones.</p>
-          </li>
-          <li className="bg-white/80 rounded-xl shadow-custom p-6 text-left cursor-pointer duration-400 transition-all hover:scale-105">
-            <span className="text-xl font-semibold text-indigo-800">FantaBalzo</span>
-            <p className="text-indigo-900">A fantasy game for bids on whoever would skip school tests.</p>
-          </li>
-          <li className="bg-white/80 rounded-xl shadow-custom p-6 text-left cursor-pointer duration-400 transition-all hover:scale-105">
-            <span className="text-xl font-semibold text-indigo-800">Polls App</span>
-            <p className="text-indigo-900">A Next.js-based app to let users play/create polls.</p>
-          </li>
-          <li className="bg-white/80 rounded-xl shadow-custom p-6 text-left cursor-pointer duration-400 transition-all hover:scale-105">
-            <span className="text-xl font-semibold text-indigo-800">Project Volta</span>
-            <p className="text-indigo-900">A Django-based donation platform for museums and cultural institutions.</p>
-          </li>
-          <li className="bg-white/80 rounded-xl shadow-custom p-6 text-left cursor-pointer duration-400 transition-all hover:scale-105">
-            <span className="text-xl font-semibold text-indigo-800">Voice Recognition App</span>
-            <p className="text-indigo-900">AI-powered voice recognition using Python and dlib.</p>
-          </li>
-          <li className="bg-white/80 rounded-xl shadow-custom p-6 text-left cursor-pointer duration-400 transition-all hover:scale-105">
-            <span className="text-xl font-semibold text-indigo-800">Face Recognition App</span>
-            <p className="text-indigo-900">AI-powered face recognition using Python and dlib.</p>
-          </li>
-          <li className="bg-white/80 rounded-xl shadow-custom p-6 text-left cursor-pointer duration-400 transition-all hover:scale-105">
-            <span className="text-xl font-semibold text-indigo-800">Text Summarization App</span>
-            <p className="text-indigo-900">AI-powered text summarization using Python.</p>
-          </li>
+          {[
+            ["Spotify Dashboard", "A React dashboard for Spotify analytics and insights based on a python server."],
+            ["Bar Service", "A React App to see all cocktails and create new ones."],
+            ["FantaBalzo", "A fantasy game for bids on whoever would skip school tests."],
+            ["Polls App", "A Next.js-based app to let users play/create polls."],
+            ["Project Volta", "A Django-based donation platform for museums and cultural institutions."],
+            ["Voice Recognition App", "AI-powered voice recognition using Python and dlib."],
+            ["Face Recognition App", "AI-powered face recognition using Python and dlib."],
+            ["Text Summarization App", "AI-powered text summarization using Python."],
+          ].map(([title, desc], idx) => (
+            <li
+              key={idx}
+              className="project-item bg-white/80 rounded-xl shadow-custom p-6 text-left cursor-pointer duration-400 transition-all hover:scale-105"
+            >
+              <span className="text-xl font-semibold text-indigo-800">{title}</span>
+              <p className="text-indigo-900">{desc}</p>
+            </li>
+          ))}
         </ul>
       </div>
     </section>

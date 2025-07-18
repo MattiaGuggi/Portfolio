@@ -9,6 +9,7 @@ import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useGSAP } from "@gsap/react"
 import 'leaflet/dist/leaflet.css';
+import Tech from "./components/Tech"
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -76,6 +77,7 @@ function App() {
           <Home />
           <Projects />
           <About />
+          <Tech />
           <Map />
           <Contact />
           <Footer />
