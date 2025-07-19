@@ -4,13 +4,29 @@ import Footer from "./components/Footer"
 import Header from "./components/Header"
 import Home from "./components/Home"
 import Projects from "./components/Projects"
+import Tech from "./components/Tech"
+import SingleProject from "./pages/SingleProject"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useGSAP } from "@gsap/react"
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import 'leaflet/dist/leaflet.css';
-import Tech from "./components/Tech"
 
 gsap.registerPlugin(ScrollTrigger);
+
+const MainPage = () => {
+  return (
+    <main className="min-h-screen w-full flex flex-col bg-gradient-to-br from-indigo-50 to-indigo-200">
+        <Header />
+        <Home />
+        <Projects />
+        <About />
+        <Tech />
+        <Contact />
+        <Footer />
+    </main>
+  )
+};
 
 function App() {
 
@@ -33,7 +49,7 @@ function App() {
           scrollTrigger: {
             trigger: section,
             start: "top bottom",   // start when top is just entering viewport
-            end: "top 40%",  // end when bottom is mostly in view
+            end: "top center",  // end when bottom is mostly in view
             scrub: 0.5,         // smooth interpolation
           },
         }
@@ -42,17 +58,13 @@ function App() {
   }, []);
 
   return (
-    <>
-      <main className="min-h-screen w-full flex flex-col bg-gradient-to-br from-indigo-50 to-indigo-200">
-          <Header />
-          <Home />
-          <Projects />
-          <About />
-          <Tech />
-          <Contact />
-          <Footer />
-        </main>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path='*' element={<MainPage />} />
+        <Route path='/' element={<MainPage />} />
+        <Route path='/project/:title' element={<SingleProject />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
