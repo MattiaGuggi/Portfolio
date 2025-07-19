@@ -128,7 +128,7 @@ const Tech = () => {
                 ref={(el) => {
                   iconRefs.current[index] = el;
                 }}
-                className={`absolute flex items-center justify-center w-20 h-20 p-1 rounded-xl shadow-md bg-white/80 backdrop-blur transition-all`}
+                className={`absolute flex items-center justify-center w-20 h-20 p-1 rounded-xl shadow-md bg-white/80 backdrop-blur cursor-pointer transition-all `}
                 style={{
                   left: `${percent}%`,
                   top: `${top}px`,

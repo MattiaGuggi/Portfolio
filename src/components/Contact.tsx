@@ -27,21 +27,31 @@ const Contact = () => {
           toggleActions: "play none none reverse",
         }
       })
+
+      if((row as HTMLInputElement).value == 'Send') {
+        row.addEventListener('mouseenter', () => {
+          row.style.transform = ' scale(1.05)'; // Dangerous if already has transform
+        });
+
+        row.addEventListener('mouseleave', () => {
+          row.style.transform = row.style.transform.replace(/scale\([^)]*\)/, '');
+        });
+      }
     });
   }, []);
 
   return (
     <section id="contact" className="min-h-[40vh] flex flex-col items-center justify-center px-14 xs:px-4 py-10">
-      <div className="flex w-full px-4 xs:flex-col sm:flex-col xs:px-0 md:flex-row gap-8">
+      <div className="flex w-full px-4 xs:flex-col sm:flex-col xs:px-0 md:flex-row gap-20">
         {/* Map and Form each take 50% in md+ screens */}
         <div className="xs:w-full sm:w-full w-1/2 lg:w-1/2">
           <Map />
         </div>
 
-        <div className="md:w-1/2 w-full max-w-xl mx-auto text-center py-10">
+        <div className="md:w-1/2 w-full max-w-2xl text-center py-10">
           <h2 className="text-3xl font-bold text-indigo-700 mb-4">Contact</h2>
           <p className="text-indigo-900 mb-8">Feel free to reach out for collaborations, questions, or just to say hello!</p>
-          <form className="space-y-6" id='formContainer'>
+          <form className="space-y-6 w-full" id='formContainer'>
             <input
               type="text"
               placeholder="Your Name"

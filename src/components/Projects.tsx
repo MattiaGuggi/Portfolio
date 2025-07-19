@@ -23,9 +23,17 @@ const Projects = () => {
           onUpdate: (self) => {
             const progress = self.progress;
             row.style.transform = `translateY(${progress * idx})`
-          }
+          },
         }
       })
+
+      row.addEventListener('mouseenter', () => {
+        row.style.transform = ' scale(1.05)'; // Dangerous if already has transform
+      });
+
+      row.addEventListener('mouseleave', () => {
+        row.style.transform = row.style.transform.replace(/scale\([^)]*\)/, '');
+      });
     });
   }, []);
 
