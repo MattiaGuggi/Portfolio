@@ -114,7 +114,7 @@ const Tech = () => {
           })}
         </svg>
 
-        {/* Icons in 2 rows */}
+        {/* Icons in rows */}
         <div className="absolute left-0 top-0 w-full h-full" id="techContainer">
           {techs.map((tech, index) => {
             const percent = (index / (techs.length - 1)) * 100;

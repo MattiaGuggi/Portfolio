@@ -32,7 +32,7 @@ const Home = () => {
   return (
     <section
       id="home"
-      className="flex-1 flex flex-col items-center justify-center px-14 xs:px-4 py-20 text-center"
+      className="flex-1 flex flex-col items-center justify-center px-14 xs:px-4 pt-20 pb-10 text-center"
     >
       <h1 className="text-5xl xs:text-4xl font-bold text-indigo-800 leading-snug mb-6">
         {"Welcome To My Portfolio".split(" ").map((word, wordIndex) => (

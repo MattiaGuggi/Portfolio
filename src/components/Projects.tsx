@@ -32,7 +32,7 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="min-h-[60vh] w-full flex flex-col items-center justify-center py-10 px-14 xs:px-4"
+      className="min-h-[60vh] w-full flex flex-col items-center justify-center pb-10 pt-5 px-14 xs:px-4"
     >
       <div className="mx-auto text-center">
         <h2 className="text-3xl font-bold text-indigo-700 mb-4">Projects</h2>

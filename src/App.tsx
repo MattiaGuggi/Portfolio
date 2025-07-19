@@ -4,7 +4,6 @@ import Footer from "./components/Footer"
 import Header from "./components/Header"
 import Home from "./components/Home"
 import Projects from "./components/Projects"
-import Map from "./components/Map"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useGSAP } from "@gsap/react"
@@ -50,7 +49,6 @@ function App() {
           <Projects />
           <About />
           <Tech />
-          <Map />
           <Contact />
           <Footer />
         </main>
