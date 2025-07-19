@@ -1,70 +1,28 @@
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import { useEffect } from "react";
+import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Projects = () => {
-  useGSAP(() => {
-    const items = gsap.utils.toArray<HTMLElement>(".project-item");
-
-    const getColumns = () => {
-      const width = window.innerWidth;
-      if (width < 425) return 1; // xs
-      if (width < 725) return 2; // sm
-      if (width < 1024) return 2; // md
-      return 4; // default
-    };
-
-    const animateRows = () => {
-      const cols = getColumns();
-      const rows = [];
-
-      // Group items into rows
-      for (let i = 0; i < items.length; i += cols) {
-        rows.push(items.slice(i, i + cols));
-      }
-
-      rows.forEach((row) => {
-        row.forEach((item) => {
-          gsap.set(item, { opacity: 0, y: 50, scale: 0.8 });
-
-          ScrollTrigger.create({
-            trigger: item,
-            start: "top 95%",
-            onEnter: () => {
-              gsap.to(item, {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                duration: 0.4,
-                ease: "power2.out",
-              });
-            },
-            onLeaveBack: () => {
-              gsap.to(item, {
-                opacity: 0,
-                y: 50,
-                scale: 0.8,
-                duration: 0.4,
-                ease: "power2.in",
-              });
-            },
-          });
-        });
-      });
-    };
-
-    animateRows();
-    window.addEventListener("resize", () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
-      animateRows();
+  useEffect(() => {
+    gsap.utils.toArray<HTMLElement>("#boxContainer li").forEach((row, idx) => {
+      gsap.to(row, {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        scrollTrigger: {
+          trigger: row,
+          start: "top bottom",
+          end: "top 40%",
+          scrub: true,
+          onUpdate: (self) => {
+            const progress = self.progress;
+            row.style.transform = `translateY(${progress * idx})`
+          }
+        }
+      })
     });
-
-    return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
-      window.removeEventListener("resize", animateRows);
-    };
   }, []);
 
   return (
@@ -77,7 +35,7 @@ const Projects = () => {
         <p className="text-indigo-900 mb-8">
           A selection of my work, built with modern technologies and a focus on efficiency and design.
         </p>
-        <ul className="grid grid-cols-4 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-12">
+        <ul id='boxContainer' className="grid grid-cols-4 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-12">
           {[
             ["Spotify Dashboard", "A React dashboard for Spotify analytics and insights based on a python server."],
             ["Bar Service", "A React App to see all cocktails and create new ones."],
@@ -90,7 +48,8 @@ const Projects = () => {
           ].map(([title, desc], idx) => (
             <li
               key={idx}
-              className="project-item bg-white/80 rounded-xl shadow-custom p-6 text-left cursor-pointer duration-400 transition-all hover:scale-105"
+              className="project-item bg-white/80 rounded-xl shadow-custom p-6 text-left cursor-pointer duration-400 transition-all hover:scale-105
+              opacity-0 scale-75 translate-y-[50px]"
             >
               <span className="text-xl font-semibold text-indigo-800">{title}</span>
               <p className="text-indigo-900">{desc}</p>

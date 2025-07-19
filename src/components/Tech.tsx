@@ -1,4 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { useEffect, useRef } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const techs = [
   "typescript/typescript-original.svg",
@@ -14,28 +18,40 @@ const techs = [
 const Tech = () => {
   const iconRefs = useRef<(HTMLDivElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [positions, setPositions] = useState<{ x: number; top: boolean }[]>([]);
+
+  const getRows = () => {
+    const width = window.innerWidth;
+    if (width < 425) return 8; // xs
+    if (width < 725) return 4; // sm
+    if (width < 1024) return 4; // md
+    return 2; // lg
+  };
 
   useEffect(() => {
-    const updatePositions = () => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
+    const icons = gsap.utils.toArray<HTMLElement>("#techContainer div");
 
-      const newPositions = iconRefs.current.map((icon, index) => {
-        if (!icon) return { x: 0, top: index % 2 === 0 };
-        const iconRect = icon.getBoundingClientRect();
-        return {
-          x: iconRect.left + iconRect.width / 2 - rect.left,
-          top: index % 2 === 0,
-        };
-      });
-
-      setPositions(newPositions);
-    };
-
-    updatePositions();
-    window.addEventListener("resize", updatePositions);
-    return () => window.removeEventListener("resize", updatePositions);
+    gsap.fromTo(
+      icons,
+      {
+        opacity: 0,
+        scale: 0.75,
+        y: 50,
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.01,
+        ease: "back.out(1.7)", // Gives a smooth zoom effect
+        stagger: 0.15, // Animates one after the other
+        scrollTrigger: {
+          trigger: "#techContainer",
+          start: "top 80%",
+          end: "top center",
+          scrub: true,
+        },
+      }
+    );
   }, []);
 
   return (
@@ -84,17 +100,18 @@ const Tech = () => {
         </svg>
 
         {/* Icons in 2 rows */}
-        <div className="absolute left-0 top-0 w-full h-full">
+        <div className="absolute left-0 top-0 w-full h-full" id="techContainer">
           {techs.map((tech, index) => {
             const percent = (index / (techs.length - 1)) * 100;
-            const topClass = index % 2 === 0 ? "top-[80px]" : "top-[260px]";
+            const topClass = index % getRows() === 0 ? "top-[80px]" : "top-[260px]";
             return (
               <div
                 key={index}
                 ref={(el) => {
                   iconRefs.current[index] = el;
                 }}
-                className={`absolute ${topClass} flex items-center justify-center w-20 h-20 p-3 rounded-xl shadow-md bg-white/80 backdrop-blur transition-all`}
+                className={`absolute ${topClass} flex items-center justify-center w-20 h-20 p-1 rounded-xl shadow-md bg-white/80 backdrop-blur transition-all
+                 opacity-0 scale-75 translate-y-[50px]`}
                 style={{
                   left: `${percent}%`,
                   transform: "translateX(-50%)",

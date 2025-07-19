@@ -17,56 +17,28 @@ function App() {
 
   useGSAP(() => {
     const sections = gsap.utils.toArray<HTMLElement>("section");
-    const mm = gsap.matchMedia();
-
-    mm.add("(max-width: 480px)", () => {
-      sections.forEach((section) => {
-        gsap.fromTo(
-          section,
-          {
-            opacity: 0,
-            y: 80,
-            scale: 0.8
+    
+    sections.forEach((section) => {
+      gsap.fromTo(
+        section,
+        {
+          opacity: 0,
+          y: 80,
+          scale: 0.8
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top bottom",   // start when top is just entering viewport
+            end: "top 40%",  // end when bottom is mostly in view
+            scrub: 0.5,         // smooth interpolation
           },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: section,
-              start: "top bottom",   // start when top is just entering viewport
-              end: "top 40%",  // end when bottom is mostly in view
-              scrub: 0.5,         // smooth interpolation
-            },
-          }
-        );
-      });
-    });
-
-    mm.add("(min-width: 481px)", () => {
-      sections.forEach((section) => {
-        gsap.fromTo(
-          section,
-          {
-            opacity: 0,
-            y: 80,
-            scale: 0.8
-          },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: section,
-              start: "top bottom",   // start when top is just entering viewport
-              end: "bottom bottom 80%",  // end when bottom is mostly in view
-              scrub: 0.5,         // smooth interpolation
-            },
-          }
-        );
-      });
+        }
+      );
     });
   }, []);
 
