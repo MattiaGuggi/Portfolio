@@ -7,7 +7,11 @@ gsap.registerPlugin(ScrollTrigger);
 const Projects = () => {
   useEffect(() => {
     gsap.utils.toArray<HTMLElement>("#boxContainer li").forEach((row, idx) => {
-      gsap.to(row, {
+      gsap.fromTo(row, {
+        y: 50,
+        opacity: 0,
+        scale: 0.7
+      }, {
         y: 0,
         opacity: 1,
         scale: 1,
@@ -48,8 +52,7 @@ const Projects = () => {
           ].map(([title, desc], idx) => (
             <li
               key={idx}
-              className="project-item bg-white/80 rounded-xl shadow-custom p-6 text-left cursor-pointer duration-400 transition-all hover:scale-105
-              opacity-0 scale-75 translate-y-[50px]"
+              className="project-item bg-white/80 rounded-xl shadow-custom p-6 text-left cursor-pointer duration-400 transition-all hover:scale-105"
             >
               <span className="text-xl font-semibold text-indigo-800">{title}</span>
               <p className="text-indigo-900">{desc}</p>

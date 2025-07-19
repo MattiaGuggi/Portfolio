@@ -1,11 +1,39 @@
+import gsap from "gsap";
+import { useEffect } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 const Contact = () => {
+  useEffect(() => {
+    const inputs = gsap.utils.toArray<HTMLElement>("#formContainer > *");
+
+    inputs.forEach((row) => {
+      gsap.fromTo(row, {
+        y: 50,
+        opacity: 0,
+        scale: 0.7
+      }, {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        ease: 'power3.out',
+        stagger: 0.25,
+        scrollTrigger: {
+          trigger: '#formContainer',
+          start: "top 85%",
+          toggleActions: "play none none reverse", // animates in/out smoothly
+        }
+      })
+    });
+  }, []);
 
   return (
     <section id="contact" className="min-h-[40vh] flex flex-col items-center justify-center px-4 py-10">
       <div className="max-w-xl mx-auto text-center">
         <h2 className="text-3xl font-bold text-indigo-700 mb-4">Contact</h2>
         <p className="text-indigo-900 mb-8">Feel free to reach out for collaborations, questions, or just to say hello!</p>
-        <form className="space-y-6">
+        <form className="space-y-6" id='formContainer'>
           <input
             type="text"
             placeholder="Your Name"

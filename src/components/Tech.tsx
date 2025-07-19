@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -18,6 +18,7 @@ const techs = [
 const Tech = () => {
   const iconRefs = useRef<(HTMLDivElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [rows, setRows] = useState<number>(2); // default to 2 rows for large screens
 
   const getRows = () => {
     const width = window.innerWidth;
@@ -27,11 +28,21 @@ const Tech = () => {
     return 2; // lg
   };
 
+  
+  useEffect(() => {
+    const handleResize = () => {
+      setRows(getRows());
+    };
+
+    handleResize(); // set initially
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useEffect(() => {
     const icons = gsap.utils.toArray<HTMLElement>("#techContainer div");
 
-    gsap.fromTo(
-      icons,
+    gsap.fromTo(icons,
       {
         opacity: 0,
         scale: 0.75,
@@ -49,10 +60,11 @@ const Tech = () => {
           start: "top 80%",
           end: "top center",
           scrub: true,
+          toggleActions: "play none none reverse", // animates in/out smoothly
         },
       }
     );
-  }, []);
+  }, [rows]);
 
   return (
     <section
@@ -84,13 +96,16 @@ const Tech = () => {
           {techs.map((_, i) => {
             const spacing = 1000 / (techs.length - 1); // space across 1000 viewBox
             const x = i * spacing;
-            const top = i % 2 === 0;
+
+            const rowIndex = i % rows;
+            const rowSpacing = 180 / (rows - 1);
+            const y1 = 80 + rowSpacing * rowIndex;
             return (
               <line
                 key={i}
                 x1={x}
                 x2={x}
-                y1={top ? 140 : 260}
+                y1={y1}
                 y2={200}
                 stroke="#4338ca"
                 strokeWidth="1.5"
@@ -103,17 +118,20 @@ const Tech = () => {
         <div className="absolute left-0 top-0 w-full h-full" id="techContainer">
           {techs.map((tech, index) => {
             const percent = (index / (techs.length - 1)) * 100;
-            const topClass = index % getRows() === 0 ? "top-[80px]" : "top-[260px]";
+            const rowIndex = index % rows;
+            const rowSpacing = 180 / (rows - 1); // vertical spacing across 180px (between 80 and 260)
+            const top = 80 + rowSpacing * rowIndex;
+
             return (
               <div
                 key={index}
                 ref={(el) => {
                   iconRefs.current[index] = el;
                 }}
-                className={`absolute ${topClass} flex items-center justify-center w-20 h-20 p-1 rounded-xl shadow-md bg-white/80 backdrop-blur transition-all
-                 opacity-0 scale-75 translate-y-[50px]`}
+                className={`absolute flex items-center justify-center w-20 h-20 p-1 rounded-xl shadow-md bg-white/80 backdrop-blur transition-all`}
                 style={{
                   left: `${percent}%`,
+                  top: `${top}px`,
                   transform: "translateX(-50%)",
                 }}
               >
