@@ -9,10 +9,16 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'MyTextFonr';
+  src: url('./assets//fonts//Fredoka_Condensed-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-size: normal;
+}
+
 #root {
   height: 100vh;
   width: 100%;
-  font-family: 'MyFont', sans-serif;
 }
 
 html,
@@ -25,4 +31,12 @@ input[type='number']::-webkit-outer-spin-button,
 input[type='number']::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+h1, h2 {
+  font-family: 'MyFont', sans-serif;
+}
+
+span {
+  font-family: 'MyTextFont', sans-serif;
 }

@@ -36,16 +36,16 @@ const Home = () => {
     >
       <h1 className="text-5xl xs:text-4xl font-bold text-indigo-800 leading-snug mb-6 font-myfont">
         {"Welcome To My Portfolio".split(" ").map((word, wordIndex) => (
-          <span key={wordIndex} className="inline-block mr-2">
+          <p key={wordIndex} className="inline-block mr-2">
             {word.split("").map((char, charIndex) => (
-              <span
+              <a
                 key={`${wordIndex}-${charIndex}`}
                 className="animated-char inline-block opacity-0 translate-y-4"
               >
                 {char}
-              </span>
+              </a>
             ))}
-          </span>
+          </p>
         ))}
       </h1>
 

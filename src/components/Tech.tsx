@@ -17,6 +17,7 @@ const techs = [
 
 const Tech = () => {
   const centralLineRef = useRef<SVGLineElement | null>(null);
+  const verticalLinesRef = useRef<SVGLineElement[]>([]);
   const iconRefs = useRef<(HTMLDivElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const [rows, setRows] = useState<number>(2); // default to 2 rows for large screens
@@ -32,7 +33,7 @@ const Tech = () => {
   
   useEffect(() => {
     const handleResize = () => {
-      setRows(getRows());
+      setRows(2);
     };
 
     handleResize(); // set initially
@@ -43,8 +44,9 @@ const Tech = () => {
   useEffect(() => {
     const icons = gsap.utils.toArray<HTMLElement>("#techContainer div");
     const line = centralLineRef.current;
+    const verticalLines = verticalLinesRef.current;
 
-    if (!line || icons.length === 0) return;
+    if (!line || verticalLines.length === 0 || icons.length === 0) return;
 
     const lineLength = line.getTotalLength();
 
@@ -72,20 +74,37 @@ const Tech = () => {
         markers: true,
       }
     });
-    
+
+    // Animate the main horizontal line
     timeline.to(line, {
       strokeDashoffset: 0,
       ease: "none",
-    })
-    .to(icons, {
+    });
+
+    // Animate each vertical line outward from center (y=200)
+    verticalLines.forEach((vLine, i) => {
+      const rowIndex = i % rows;
+      const rowSpacing = 180 / (rows - 1);
+      const yTarget = 80 + rowSpacing * rowIndex;
+
+      timeline.to(vLine, {
+        attr: {
+          y1: yTarget, // Decide whether to grow upward or downward
+        },
+        ease: "power1.out",
+        duration: 0.3,
+      }, "<+" + i * 0.03); // slightly staggered
+    });
+
+    // Animate icons
+    timeline.to(icons, {
       stagger: 0.05,
       opacity: 1,
       scale: 1,
       y: 0,
-    }, "<"); // "<" means start at the same time as previous
+    }, "<");
 
   }, [rows]);
-
 
   return (
     <section
@@ -118,19 +137,18 @@ const Tech = () => {
           {techs.map((_, i) => {
             const spacing = 1000 / (techs.length - 1); // space across 1000 viewBox
             const x = i * spacing;
-
-            const rowIndex = i % rows;
-            const rowSpacing = 180 / (rows - 1);
-            const y1 = 80 + rowSpacing * rowIndex;
             return (
               <line
                 key={i}
                 x1={x}
                 x2={x}
-                y1={y1}
+                y1={200}
                 y2={200}
                 stroke="#4338ca"
                 strokeWidth="1.5"
+                ref={(el) => {
+                  if (el) verticalLinesRef.current[i] = el;
+                }}
               />
             );
           })}
