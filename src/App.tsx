@@ -16,20 +16,19 @@ gsap.registerPlugin(ScrollTrigger);
 
 const MainPage = () => {
   return (
-    <main className="min-h-screen w-full flex flex-col bg-gradient-to-br from-indigo-50 to-indigo-200">
+    <>
         <Header />
         <Home />
         <Projects />
-        <About />
         <Tech />
+        <About />
         <Contact />
         <Footer />
-    </main>
+    </>
   )
 };
 
 function App() {
-
   useGSAP(() => {
     const sections = gsap.utils.toArray<HTMLElement>("section");
     
@@ -55,15 +54,21 @@ function App() {
         }
       );
     });
+    
+    return () => {
+      ScrollTrigger.getAll().forEach(t => t.kill());
+    };
   }, []);
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='*' element={<MainPage />} />
-        <Route path='/' element={<MainPage />} />
-        <Route path='/project/:title' element={<SingleProject />} />
-      </Routes>
+      <main className="flex flex-col min-h-screen w-full bg-gradient-to-br from-indigo-50 to-indigo-200" id="mainPage">
+        <Routes>
+          <Route path='*' element={<MainPage />} />
+          <Route path='/' element={<MainPage />} />
+          <Route path='/project/:title' element={<SingleProject />} />
+        </Routes>
+      </main>
     </BrowserRouter>
   )
 }

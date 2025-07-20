@@ -1,15 +1,13 @@
 import { useEffect } from "react";
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Projects = () => {
-  const navigate = useNavigate();
 
   const viewProject = (title: string) => {
-    navigate(`/project/${title}`);
+    window.location.href = `/project/${title}`;
   };
 
   const projects: [string, string, string[]][] = [

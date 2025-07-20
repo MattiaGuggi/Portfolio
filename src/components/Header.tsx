@@ -115,7 +115,7 @@ const Header = () => {
 
       {isDesktop ? (
         <nav className="flex gap-10 text-indigo-700 font-semibold tracking-wide">
-          {["home", "projects", "map", "about", "contact"].map((id) => (
+          {["home", "projects", "about", "tech", "contact"].map((id) => (
             <a
               key={id}
               href={`#${id}`}

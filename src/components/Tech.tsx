@@ -16,6 +16,7 @@ const techs = [
 ];
 
 const Tech = () => {
+  const centralLineRef = useRef<SVGLineElement | null>(null);
   const iconRefs = useRef<(HTMLDivElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const [rows, setRows] = useState<number>(2); // default to 2 rows for large screens
@@ -41,41 +42,60 @@ const Tech = () => {
 
   useEffect(() => {
     const icons = gsap.utils.toArray<HTMLElement>("#techContainer div");
+    const line = centralLineRef.current;
 
-    gsap.fromTo(icons,
-      {
+    if (!line || icons.length === 0) return;
+
+    const lineLength = line.getTotalLength();
+
+    icons.forEach(icon => {
+      gsap.set(icon, {
         opacity: 0,
-        scale: 0.75,
         y: 50,
-      },
-      {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        duration: 0.01,
-        ease: "back.out(1.7)", // Gives a smooth zoom effect
-        stagger: 0.15, // Animates one after the other
-        scrollTrigger: {
-          trigger: "#techContainer",
-          start: "top 80%",
-          end: "top center",
-          scrub: true,
-          toggleActions: "play none none reverse", // animates in/out smoothly
-        },
+        scale: 0.8
+      });
+    });
+
+    gsap.set(line, {
+      strokeDasharray: lineLength,
+      strokeDashoffset: lineLength,
+    });
+
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#tech",
+        start: "center center",
+        end: "+=750 center",
+        scrub: true,
+        pin: true,
+        markers: true,
       }
-    );
+    });
+    
+    timeline.to(line, {
+      strokeDashoffset: 0,
+      ease: "none",
+    })
+    .to(icons, {
+      stagger: 0.05,
+      opacity: 1,
+      scale: 1,
+      y: 0,
+    }, "<"); // "<" means start at the same time as previous
+
   }, [rows]);
+
 
   return (
     <section
       id="tech"
-      className="min-h-[60vh] w-full flex flex-col items-center justify-center py-10 px-4 sm:px-10"
+      className="min-h-[60vh] w-full flex flex-col items-center justify-center py-10 px-4 sm:px-10 mb-[750px]"
     >
       <h1 className="text-4xl font-bold text-indigo-700 text-center mb-12">
         Tech I Use
       </h1>
 
-      <div className="relative w-full max-w-6xl h-[400px]" ref={containerRef}>
+      <div className="relative w-full max-w-6xl h-[400px] mb-32" ref={containerRef}>
         {/* Bus line and vertical connectors */}
         <svg
           className="absolute top-0 left-0 w-full h-full pointer-events-none"
@@ -90,6 +110,7 @@ const Tech = () => {
             y2="200"
             stroke="#4338ca"
             strokeWidth="2"
+            ref={centralLineRef}
           />
 
           {/* Vertical lines to icons */}

@@ -68,7 +68,7 @@ const Home = () => {
         </a>
       </div>
 
-      <div className="w-full max-w-xl h-[300px] bg-indigo-100 rounded-xl shadow-inner flex items-center justify-center text-indigo-400 text-xl">
+      <div className="w-full max-w-xl h-[300px] bg-indigo-100 rounded-xl shadow-inner flex items-center justify-center text-indigo-400 text-xl mb-16">
         (Image or animation placeholder)
       </div>
     </section>
