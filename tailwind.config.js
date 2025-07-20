@@ -9,6 +9,9 @@ module.exports = {
       boxShadow: {
         'custom': '0 0 8px rgba(0, 0, 0, 0.2)',
       },
+      fontFamily: {
+        myfont: ['MyFont', 'sans-serif'],
+      },
       screens: {
         xs: { min: '320px', max: '600px' },
         sm: { min: '500px', max: '768px' },
@@ -17,5 +20,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require('tailwind-scrollbar-hide'),],
+  plugins: [],
 }
