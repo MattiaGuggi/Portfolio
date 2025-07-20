@@ -67,7 +67,7 @@ const Tech = () => {
       scrollTrigger: {
         trigger: "#tech",
         start: "center center",
-        end: "+=750 center",
+        end: "+=1000 center",
         scrub: true,
         pin: true,
         pinSpacing: false,
@@ -109,7 +109,7 @@ const Tech = () => {
   return (
     <section
       id="tech"
-      className="min-h-[60vh] w-full flex flex-col items-center justify-center py-10 px-4 sm:px-10 mt-20 mb-[750px]"
+      className="min-h-[60vh] w-full flex flex-col items-center justify-center py-10 px-4 sm:px-10 mt-20 mb-[1000px]"
     >
       <h1 className="text-4xl font-bold text-indigo-700 text-center mb-12">
         Tech I Use
