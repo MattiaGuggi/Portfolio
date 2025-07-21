@@ -1,9 +1,13 @@
 import { Download } from "lucide-react";
 
-const About = () => {
+type SectionProps = {
+  id: string;
+};
+
+const About: React.FC<SectionProps> = ({ id }) => {
   return (
     <>
-      <section id="about" className="min-h-[40vh] flex flex-col items-center justify-center px-14 xs:px-4 py-10">
+      <section id={id} className="min-h-[40vh] flex flex-col items-center justify-center px-14 xs:px-4 py-10">
         <div className="max-w-2xl mx-auto text-center my-7">
             <h2 className="text-3xl font-bold text-indigo-700 mb-4">About Me</h2>
             <p className="text-indigo-900 mb-8">Hi, I'm Mattia Guggi, a passionate developer focused on building efficient, modern, and minimalistic web applications. I love working with Next.js, React, and Python to create impactful digital experiences.</p>

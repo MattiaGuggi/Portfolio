@@ -15,24 +15,12 @@ const Header = () => {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, type: string) => {
     e.preventDefault();
-    const section = document.getElementById(type);
-    if (!section) return;
-
-    section.style.scrollMargin = "180px";
-    section.scrollIntoView({ behavior: "smooth" });
-    gsap.to(window, {
-      duration: 1,
-      scrollTo: {
-        y: section,
-        offsetY: 70,
-      },
-      ease: "power2.inOut",
-      onComplete: () => {
-        setIsOpen(false);
-        ScrollTrigger.refresh();
-      },
-      overwrite: "auto",
-    });
+    setTimeout(() => {
+      const section = document.getElementById(type);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
   };
 
   // Detect desktop view

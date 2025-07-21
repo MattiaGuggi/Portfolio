@@ -50,7 +50,7 @@ const SingleProject = () => {
   return (
     <>
         <section id="single-project" className="min-h-[60vh] w-full flex flex-col items-center justify-center mb-20 pb-10 pt-5 px-14 xs:px-4">
-          <MoveLeft onClick={() => navigate('/')} className="cursor-pointer duration-400 transition-all scale-125 hover:scale-150 text-indigo-600 relative" />
+          <MoveLeft onClick={() => navigate('/#projects')} className="cursor-pointer duration-400 transition-all scale-125 hover:scale-150 text-indigo-600 relative" />
           <h1 className="font-bold text-5xl xs:text-4xl text-transparent bg-clip-text bg-gradient-to-br from-indigo-100 via-indigo-400 to-indigo-600 leading-snug mb-6">{title}</h1>
           <p className="text-lg text-indigo-900 max-w-2xl mb-8 text-center">
             A React project based on an API that lets users search for <span className='text-indigo-700 font-semibold'>drinks</span> and 

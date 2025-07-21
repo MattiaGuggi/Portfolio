@@ -4,7 +4,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Projects = () => {
+type SectionProps = {
+  id: string;
+};
+
+const Projects: React.FC<SectionProps> = ({ id }) => {
 
   const viewProject = (title: string) => {
     window.location.href = `/project/${title}`;
@@ -56,7 +60,7 @@ const Projects = () => {
 
   return (
     <section
-      id="projects"
+      id={id}
       className="min-h-[60vh] w-full flex flex-col items-center justify-center pb-10 pt-5 px-14 xs:px-4"
     >
       <div className="mx-auto text-center">

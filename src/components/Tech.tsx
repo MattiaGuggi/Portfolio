@@ -15,7 +15,11 @@ const techs = [
   "nodejs/nodejs-original-wordmark.svg",
 ];
 
-const Tech = () => {
+type SectionProps = {
+  id: string;
+};
+
+const Tech: React.FC<SectionProps> = ({ id }) => {
   const centralLineRef = useRef<SVGLineElement | null>(null);
   const verticalLinesRef = useRef<SVGLineElement[]>([]);
   const iconRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -108,7 +112,7 @@ const Tech = () => {
 
   return (
     <section
-      id="tech"
+      id={id}
       className="min-h-[60vh] w-full flex flex-col items-center justify-center py-10 px-4 sm:px-10 mt-20 mb-[1000px]"
     >
       <h1 className="text-4xl font-bold text-indigo-700 text-center mb-12">

@@ -9,20 +9,38 @@ import SingleProject from "./pages/SingleProject"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useGSAP } from "@gsap/react"
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import 'leaflet/dist/leaflet.css';
+import { useEffect } from "react"
 
 gsap.registerPlugin(ScrollTrigger);
 
 const MainPage = () => {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (!hash) return window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    const id = hash.replace('#', '');
+
+    // small delay
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  }, [hash]);
+
+
   return (
     <>
         <Header />
-        <Home />
-        <Projects />
-        <Tech />
-        <About />
-        <Contact />
+        <Home id="home" />
+        <Projects id="projects" />
+        <Tech id="tech" />
+        <About id="about" />
+        <Contact id="contact" />
         <Footer />
     </>
   )

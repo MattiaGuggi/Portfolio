@@ -1,7 +1,12 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
-const Home = () => {
+type SectionProps = {
+  id: string;
+};
+
+const Home: React.FC<SectionProps> = ({ id }) => {
+
   useGSAP(() => {
     const tl = gsap.timeline();
 
@@ -31,7 +36,7 @@ const Home = () => {
 
   return (
     <section
-      id="home"
+      id={id}
       className="flex-1 flex flex-col items-center justify-center px-14 xs:px-4 pt-20 pb-10 text-center"
     >
       <h1 className="text-5xl xs:text-4xl font-bold text-indigo-800 leading-snug mb-6 font-myfont">
