@@ -35,7 +35,6 @@ const MainPage = () => {
 
   return (
     <>
-        <Header />
         <Home id="home" />
         <Projects id="projects" />
         <Tech id="tech" />
@@ -84,7 +83,7 @@ function App() {
         <Routes>
           <Route path='*' element={<MainPage />} />
           <Route path='/' element={<MainPage />} />
-          <Route path='/project/:title' element={<SingleProject />} />
+          <Route path='/projects/:title' element={<SingleProject />} />
         </Routes>
       </main>
     </BrowserRouter>

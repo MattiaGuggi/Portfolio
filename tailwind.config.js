@@ -11,6 +11,7 @@ module.exports = {
       },
       fontFamily: {
         myfont: ['MyFont', 'sans-serif'],
+        mytextfont: ['MyTextFont', 'sans-serif'],
       },
       screens: {
         xs: { min: '320px', max: '600px' },
