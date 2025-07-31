@@ -1,4 +1,5 @@
 import { Download } from "lucide-react";
+import Scene from "./Scene";
 
 type SectionProps = {
   id: string;
@@ -39,6 +40,7 @@ const About: React.FC<SectionProps> = ({ id }) => {
         </a>
         <div className="w-full lg:w-full h-full bg-gradient-to-br from-indigo-300 to-indigo-500 rounded-xl shadow-lg flex items-center justify-center py-10 mb-16 ">
           <span className="text-white text-3xl font-bold">Hero Section (GSAP + Three.js)</span>
+          <Scene />
         </div>
       </section>
     </>
