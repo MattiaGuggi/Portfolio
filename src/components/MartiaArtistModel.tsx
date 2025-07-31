@@ -15,7 +15,7 @@ const MartialArtistModel = ({
   rotation = [0, 0, 0],
 }: MartialArtistModelProps) => {
   const group = useRef<Group>(null)
-  const { scene } = useGLTF('/Karate_Focus.glb')
+  const { scene } = useGLTF('/model/Karate_Focus.glb')
 
   useFrame(() => {
     if (!group.current) return;

@@ -74,7 +74,7 @@ const Home: React.FC<SectionProps> = ({ id }) => {
           <div ref={bgRef} className="absolute inset-0 w-full h-full z-0 flex justify-center pointer-events-none">
             <h1 className="font-bold text-5xl text-center absolute font-mytextfont text-white bottom-96">Scroll to reveal</h1>
             <img
-              src="bg.jpg"
+              src="images/bg.jpg"
               alt="Background"
               className="w-full h-full object-cover"
             />
