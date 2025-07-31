@@ -8,7 +8,11 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-const Header = () => {
+type MyComponentProps = {
+  ref: React.Ref<HTMLElement>;
+};
+
+const Header = ({ ref }: MyComponentProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -78,11 +82,11 @@ const Header = () => {
 
   return (
     <header
+      ref={ref}
       className="
-        px-8 py-6 flex items-center justify-between
+        fixed top-0 px-8 py-6 flex items-center justify-between
         bg-white/80 backdrop-blur border-b border-indigo-200
-        shadow-lg
-        relative z-50
+        shadow-lg z-50 w-full
         transition-shadow transition-colors duration-300
         hover:shadow-xl
         hover:bg-white/95

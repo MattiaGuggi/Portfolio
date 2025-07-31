@@ -2,6 +2,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import Header from "./Header";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,6 +15,7 @@ const Home: React.FC<SectionProps> = ({ id }) => {
   const bgRef = useRef(null);
   const textRef = useRef(null);
   const contentRef = useRef(null);
+  const headerRef = useRef(null);
 
   useEffect(() => {
   const ctx = gsap.context(() => {
@@ -45,7 +47,7 @@ const Home: React.FC<SectionProps> = ({ id }) => {
     }, "<");
 
     // 3. Fade in content (AFTER text has scaled)
-    tl.fromTo(contentRef.current, {
+    tl.fromTo([contentRef.current, headerRef.current], {
       opacity: 0,
       y: 50
     }, {
@@ -59,62 +61,65 @@ const Home: React.FC<SectionProps> = ({ id }) => {
 }, []);
 
   return (
-    <main className="w-full bg-gradient-to-br from-indigo-50 to-indigo-200">
-      {/* All-in-One Pinned Section */}
-      <section
-        ref={wrapperRef}
-        id={id}
-        className="relative w-full min-h-screen flex flex-col items-center justify-center px-4 text-center"
-      >
-        {/* Background Image */}
-        <div ref={bgRef} className="absolute inset-0 w-full h-full z-0 flex justify-center pointer-events-none">
-          <h1 className="font-bold text-5xl text-center absolute font-mytextfont text-white bottom-96">Scroll to reveal</h1>
-          <img
-            src="bg.jpg"
-            alt="Background"
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        {/* Welcome Text */}
-        <h1
-          ref={textRef}
-          className="text-6xl xs:text-4xl font-bold text-indigo-800 z-10 font-myfont mt-12"
+    <>
+      <main className="w-full bg-gradient-to-br from-indigo-50 to-indigo-200">
+        {/* All-in-One Pinned Section */}
+        <Header ref={headerRef} />
+        <section
+          ref={wrapperRef}
+          id={id}
+          className="relative w-full min-h-screen flex flex-col items-center justify-center px-4 text-center"
         >
-          Welcome To My Portfolio
-        </h1>
-
-        {/* Main Content (fades in) */}
-        <div ref={contentRef} className="z-10 pt-16 max-w-4xl">
-          <p className="text-lg text-indigo-900 max-w-2xl mb-8 mx-auto">
-            I'm <strong>Mattia Guggi</strong>, a full-stack developer with a passion for building sleek, performant web apps using{" "}
-            <span className="text-indigo-700 font-semibold">Next.js</span>,{" "}
-            <span className="text-indigo-700 font-semibold">React</span>,{" "}
-            <span className="text-indigo-700 font-semibold">Node.js</span>, and{" "}
-            <span className="text-indigo-700 font-semibold">Python</span>. I focus on simplicity, speed, and elegant UI/UX.
-          </p>
-
-          <div className="flex gap-6 mb-12 justify-center">
-            <a
-              href="#projects"
-              className="px-6 py-3 bg-indigo-700 text-white font-semibold rounded-lg hover:bg-indigo-800 transition duration-300 xs:px-4 xs:py-2"
-            >
-              View Projects
-            </a>
-            <a
-              href="#contact"
-              className="px-6 py-3 border-2 border-indigo-700 text-indigo-700 font-semibold rounded-lg hover:bg-indigo-700 hover:text-white transition duration-300 xs:px-4 xs:py-2"
-            >
-              Contact Me
-            </a>
+          {/* Background Image */}
+          <div ref={bgRef} className="absolute inset-0 w-full h-full z-0 flex justify-center pointer-events-none">
+            <h1 className="font-bold text-5xl text-center absolute font-mytextfont text-white bottom-96">Scroll to reveal</h1>
+            <img
+              src="bg.jpg"
+              alt="Background"
+              className="w-full h-full object-cover"
+            />
           </div>
 
-          <div className="w-full max-w-xl h-[300px] bg-indigo-100 rounded-xl shadow-inner flex items-center justify-center text-indigo-400 text-xl mb-16 mx-auto">
-            (Image or animation placeholder)
+          {/* Welcome Text */}
+          <h1
+            ref={textRef}
+            className="text-6xl xs:text-4xl font-bold text-indigo-800 z-10 font-myfont mt-12"
+          >
+            Welcome To My Portfolio
+          </h1>
+
+          {/* Main Content (fades in) */}
+          <div ref={contentRef} className="z-10 pt-16 max-w-4xl">
+            <p className="text-lg text-indigo-900 max-w-2xl mb-8 mx-auto">
+              I'm <strong>Mattia Guggi</strong>, a full-stack developer with a passion for building sleek, performant web apps using{" "}
+              <span className="text-indigo-700 font-semibold">Next.js</span>,{" "}
+              <span className="text-indigo-700 font-semibold">React</span>,{" "}
+              <span className="text-indigo-700 font-semibold">Node.js</span>, and{" "}
+              <span className="text-indigo-700 font-semibold">Python</span>. I focus on simplicity, speed, and elegant UI/UX.
+            </p>
+
+            <div className="flex gap-6 mb-12 justify-center">
+              <a
+                href="#projects"
+                className="px-6 py-3 bg-indigo-700 text-white font-semibold rounded-lg hover:bg-indigo-800 transition duration-300 xs:px-4 xs:py-2"
+              >
+                View Projects
+              </a>
+              <a
+                href="#contact"
+                className="px-6 py-3 border-2 border-indigo-700 text-indigo-700 font-semibold rounded-lg hover:bg-indigo-700 hover:text-white transition duration-300 xs:px-4 xs:py-2"
+              >
+                Contact Me
+              </a>
+            </div>
+
+            <div className="w-full max-w-xl h-[300px] bg-indigo-100 rounded-xl shadow-inner flex items-center justify-center text-indigo-400 text-xl mb-16 mx-auto">
+              (Image or animation placeholder)
+            </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </>
   );
 }
 
