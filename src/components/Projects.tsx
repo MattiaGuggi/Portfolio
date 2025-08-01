@@ -84,8 +84,8 @@ const Projects: React.FC<SectionProps> = ({ id }) => {
         className="min-h-[60vh] w-full flex flex-col items-center justify-center pb-10 pt-5 px-14 xs:px-4"
       >
         <div className="mx-auto text-center">
-          <h2 className="text-3xl font-bold text-indigo-700 mb-4">Projects</h2>
-          <p className="text-indigo-900 mb-8">
+          <h2 className="text-3xl font-bold text-indigo-800 mb-4">Projects</h2>
+          <p className="text-white/80 mb-8">
             A selection of my work, built with modern technologies and a focus on efficiency and design.
           </p>
           <ul id='boxContainer' className="grid grid-cols-4 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-12">

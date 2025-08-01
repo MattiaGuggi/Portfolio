@@ -109,10 +109,10 @@ const Header = ({ ref }: MyComponentProps) => {
                 text-lg
                 font-semibold
                 cursor-pointer
-                transition-colors duration-300
-                hover:text-indigo-500
+                transition-all duration-300
+                text-indigo-800 hover:text-indigo-900 hover:-translate-y-1
                 before:absolute before:-bottom-1 before:left-0 before:h-0.5
-                before:w-0 before:bg-indigo-500 before:transition-all before:duration-300
+                before:w-0 before:bg-indigo-900 before:transition-all before:duration-300
                 hover:before:w-full
               "
             >

@@ -75,18 +75,18 @@ const SingleProject = () => {
       <section id="single-project" className="min-h-[60vh] w-full flex flex-col items-center justify-center mb-20 pb-10 pt-5 px-14 xs:px-4">
         <MoveLeft onClick={() => navigate('/#projects')} className="cursor-pointer duration-400 transition-all scale-125 hover:scale-150 text-indigo-600 relative" />
         <h1 className="font-bold text-5xl xs:text-4xl text-transparent bg-clip-text bg-gradient-to-br from-indigo-100 via-indigo-400 to-indigo-600 leading-snug mb-6">{title}</h1>
-        <p className="text-lg text-indigo-900 max-w-2xl mb-8 text-center">
+        <p className="text-lg text-white/80 max-w-2xl mb-8 text-center">
           A React project based on an API that lets users search for <span className='text-indigo-700 font-semibold'>drinks</span> and 
-          <span className='text-indigo-700 font-semibold'>cocktails</span>, aswell as <span className='text-indigo-700 font-semibold'>create new drinks </span> 
+          <span className='text-indigo-700 font-semibold'> cocktails</span>, aswell as <span className='text-indigo-700 font-semibold'>create new drinks </span> 
           with custom photos and names
           </p>
         <div className="w-full flex flex-col py-10 xs:px-4 px-14 text-center mx-auto h-full">
           <div className="flex flex-col h-full">
-            <h1 className="text-3xl font-bold text-indigo-600 py-5">Demo</h1>
+            <h1 className="text-3xl font-bold text-indigo-800 py-5">Demo</h1>
             <video autoPlay muted playsInline preload="auto" src={`/demo/${title}`} className="shadow-custom h-1/2"></video>
           </div>
           <div className="flex flex-col mb-20">
-            <h1 className="text-3xl font-bold text-indigo-600 py-5 mt-10">Tools I used</h1>
+            <h1 className="text-3xl font-bold text-indigo-800 py-5 mt-10">Tools I used</h1>
             <div id="iconContainer" className="flex items-center justify-center gap-10 mt-9">
               {icons.map(({ name, image }, idx) => (
                 <img key={idx} src={image} alt={name} className="w-32 h-32 shadow-lg rounded-2xl p-5 cursor-pointer duration-400 transition-all hover:scale-110" />
@@ -94,11 +94,11 @@ const SingleProject = () => {
             </div>
           </div>
           <div className="flex flex-col items-center justify-center w-full">
-            <h3 className="text-3xl font-bold text-indigo-600 py-5">Link</h3>
+            <h3 className="text-3xl font-bold text-indigo-800 py-5">Link</h3>
             <a
               href='https://github.com/MattiaGuggi/bar_service'
-              className="w-auto px-12 py-3 rounded-lg text-white bg-indigo-600 cursor-pointer duration-400 transition-all hover:scale-105
-              hover:bg-indigo-800 hover:-translate-y-1"
+              className="w-auto px-12 py-3 rounded-lg text-white bg-indigo-800 cursor-pointer duration-400 transition-all hover:scale-105
+              hover:bg-indigo-900 hover:-translate-y-1"
             >
               Github Repo
             </a>

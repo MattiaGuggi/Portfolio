@@ -53,8 +53,8 @@ const Contact: React.FC<SectionProps> = ({ id }) => {
         </div>
 
         <div className="md:w-1/2 w-full max-w-2xl text-center py-10">
-          <h2 className="text-3xl font-bold text-indigo-700 mb-4">Contact</h2>
-          <p className="text-indigo-900 mb-8">Feel free to reach out for collaborations, questions, or just to say hello!</p>
+          <h2 className="text-3xl font-bold text-indigo-800 mb-4">Contact</h2>
+          <p className="text-white/80 mb-8">Feel free to reach out for collaborations, questions, or just to say hello!</p>
           <form className="space-y-6 w-full" id='formContainer'>
             <input
               type="text"
@@ -74,7 +74,7 @@ const Contact: React.FC<SectionProps> = ({ id }) => {
             <input
               type="submit"
               value="Send"
-              className="cursor-pointer w-full px-6 py-2 rounded bg-indigo-700 text-white font-semibold hover:bg-indigo-800 transition-all duration-400 hover:scale-105"
+              className="cursor-pointer w-full px-6 py-2 rounded bg-indigo-800 text-white font-semibold hover:bg-indigo-900 transition-all duration-400 hover:scale-105"
             />
           </form>
         </div>

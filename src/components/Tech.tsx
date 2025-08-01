@@ -115,7 +115,7 @@ const Tech: React.FC<SectionProps> = ({ id }) => {
       id={id}
       className="min-h-[60vh] w-full flex flex-col items-center justify-center py-10 px-4 sm:px-10 mt-20 mb-[1000px]"
     >
-      <h1 className="text-4xl font-bold text-indigo-700 text-center mb-12">
+      <h1 className="text-4xl font-bold text-indigo-800 text-center mb-12">
         Tech I Use
       </h1>
 
@@ -182,7 +182,7 @@ const Tech: React.FC<SectionProps> = ({ id }) => {
                 <img
                   src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${tech}`}
                   alt={tech.split("/")[0]}
-                  className="object-contain h-8"
+                  className="object-contain h-full p-1"
                 />
               </div>
             );

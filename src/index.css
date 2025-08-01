@@ -40,3 +40,7 @@ h1, h2 {
 span {
   font-family: 'MyTextFont', sans-serif;
 }
+
+a, p {
+  color: white;
+}

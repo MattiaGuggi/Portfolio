@@ -78,7 +78,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <main className="flex flex-col min-h-screen w-full bg-gradient-to-br from-indigo-50 to-indigo-200" id="mainPage">
+      <main className="flex flex-col min-h-screen w-full bg-gradient-to-br from-[#0a0c23] to-[#0b1120]" id="mainPage">
         <Routes>
           <Route path='*' element={<MainPage />} />
           <Route path='/' element={<MainPage />} />

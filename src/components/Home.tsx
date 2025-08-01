@@ -70,13 +70,13 @@ const Home: React.FC<SectionProps> = ({ id }) => {
 
   return (
     <>
-      <main className="w-full bg-gradient-to-br from-indigo-50 to-indigo-200">
+      <main className="w-full bg-gradient-to-br bg-gradient-to-tr from-[#1e1b4b] via-[#1e293b] to-[#0f172a]">
         {/* All-in-One Pinned Section */}
         <Header ref={headerRef} />
         <section
           ref={wrapperRef}
           id={id}
-          className="relative w-full min-h-screen flex flex-col items-center justify-center px-4 text-center"
+          className="relative w-full min-h-screen flex flex-col items-center justify-center px-4 text-center pt-36"
         >
           {/* Background Image */}
           <div ref={bgRef} className="absolute inset-0 w-full h-full z-0 flex justify-center pointer-events-none">
@@ -98,7 +98,7 @@ const Home: React.FC<SectionProps> = ({ id }) => {
 
           {/* Main Content (fades in) */}
           <div ref={contentRef} className="z-10 pt-16 max-w-4xl">
-            <p className="text-lg text-indigo-900 max-w-2xl mb-8 mx-auto">
+            <p className="text-lg text-white/80 max-w-2xl mb-8 mx-auto">
               I'm <strong>Mattia Guggi</strong>, a full-stack developer with a passion for building sleek, performant web apps using{" "}
               <span className="text-indigo-700 font-semibold">Next.js</span>,{" "}
               <span className="text-indigo-700 font-semibold">React</span>,{" "}
@@ -109,13 +109,13 @@ const Home: React.FC<SectionProps> = ({ id }) => {
             <div className="flex gap-6 mb-12 justify-center">
               <a
                 href="#projects"
-                className="px-6 py-3 bg-indigo-700 text-white font-semibold rounded-lg hover:bg-indigo-800 transition duration-300 xs:px-4 xs:py-2"
+                className="px-6 py-3 bg-indigo-800 text-white font-semibold rounded-lg hover:bg-indigo-900 transition duration-300 xs:px-4 xs:py-2"
               >
                 View Projects
               </a>
               <a
                 href="#contact"
-                className="px-6 py-3 border-2 border-indigo-700 text-indigo-700 font-semibold rounded-lg hover:bg-indigo-700 hover:text-white transition duration-300 xs:px-4 xs:py-2"
+                className="px-6 py-3 border-2 border-indigo-800 text-indigo-800 font-semibold rounded-lg hover:bg-indigo-800 hover:text-white transition duration-300 xs:px-4 xs:py-2"
               >
                 Contact Me
               </a>
