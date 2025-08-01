@@ -72,17 +72,6 @@ const Header = ({ ref }: MyComponentProps) => {
     }
   }, [isOpen]);
 
-  useGSAP(() => {
-    gsap.fromTo("header", {
-      opacity: 0
-    }, {
-      opacity: 1,
-      duration: 1.5,
-      ease: "power2.out"
-    }
-    );
-  }, []);
-
   return (
     <header
       ref={ref}

@@ -46,14 +46,22 @@ const Home: React.FC<SectionProps> = ({ id }) => {
       ease: "power1.out"
     }, "<");
 
-    // 3. Fade in content (AFTER text has scaled)
-    tl.fromTo([contentRef.current, headerRef.current], {
+    // 3. Fade in header (AFTER the text)
+    tl.fromTo(headerRef.current, {
+      opacity: 0,
+    }, {
+      opacity: 1,
+      duration: 0.1
+    });
+
+    // 4. Fade in content (AFTER the header)
+    tl.fromTo(contentRef.current, {
       opacity: 0,
       y: 50
     }, {
       opacity: 1,
       y: 0,
-      duration: 1
+      duration: 0.7
     });
   });
 
