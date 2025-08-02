@@ -11,11 +11,10 @@ function Loader() {
 
 const Scene: React.FC = () => {
   return (
-    <Canvas camera={{ position: [0, 1.5, 5], fov: 50 }}>
+    <Canvas camera={{ position: [0, 1.5, 5], fov: 35 }}>
       <React.Suspense fallback={<Loader />}>
         <Environment preset="sunset" />
-        <MartialArtistModel />
-        <OrbitControls enablePan enableZoom enableRotate />
+        <MartialArtistModel position={[0, 0, 0]} scale={1.5} rotation={[0, 0, 0]} />
       </React.Suspense>
     </Canvas>
   )

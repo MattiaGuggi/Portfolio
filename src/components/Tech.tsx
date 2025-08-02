@@ -74,7 +74,6 @@ const Tech: React.FC<SectionProps> = ({ id }) => {
         end: "+=1000 center",
         scrub: true,
         pin: true,
-        pinSpacing: false,
         markers: true,
       }
     });

@@ -1,6 +1,5 @@
 import { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber'
 import { Group } from 'three'
 
 interface MartialArtistModelProps {
@@ -9,19 +8,9 @@ interface MartialArtistModelProps {
   rotation?: [number, number, number]
 }
 
-const MartialArtistModel = ({
-  position = [0, 0, 0],
-  scale = 1.5,
-  rotation = [0, 0, 0],
-}: MartialArtistModelProps) => {
+const MartialArtistModel = ({ position, scale, rotation }: MartialArtistModelProps) => {
   const group = useRef<Group>(null)
   const { scene } = useGLTF('/model/Karate_Focus.glb')
-
-  useFrame(() => {
-    if (!group.current) return;
-
-    group.current.rotation.y += 0.003
-  })
 
   return (
     <group ref={group} position={position} rotation={rotation} dispose={null}>

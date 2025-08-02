@@ -18,59 +18,60 @@ const Home: React.FC<SectionProps> = ({ id }) => {
   const headerRef = useRef(null);
 
   useEffect(() => {
-  const ctx = gsap.context(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: wrapperRef.current,
-        start: "top top",
-        end: "+=1250",
-        scrub: true,
-        pin: true,
-        markers: true,
-      },
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia();
+
+      // Desktop animation only
+      mm.add("(min-width: 768px)", () => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: wrapperRef.current,
+            start: "top top",
+            end: "+=1250",
+            scrub: true,
+            pin: true,
+            markers: true,
+          },
+        });
+
+        tl.to(bgRef.current, {
+          opacity: 0,
+          ease: "power1.out",
+        });
+
+        tl.fromTo(
+          textRef.current,
+          { scale: 125, x: 1500 },
+          { scale: 1, x: 0, ease: "power1.out" },
+          "<"
+        );
+
+        tl.fromTo(headerRef.current, { opacity: 0 }, { opacity: 1, duration: 0.1 });
+
+        tl.fromTo(
+          contentRef.current,
+          { opacity: 0, y: 50 },
+          { opacity: 1, y: 0, duration: 0.7 }
+        );
+      });
+
+      // Mobile fallback — just show everything normally
+      mm.add("(max-width: 767px)", () => {
+        gsap.set(bgRef.current, { opacity: 0 });
+        gsap.set(textRef.current, { scale: 1, x: 0 });
+        gsap.set(headerRef.current, { opacity: 1 });
+        gsap.set(contentRef.current, { opacity: 1, y: 0 });
+      });
+
+      return () => mm.revert();
     });
 
-    // 1. Fade out background
-    tl.to(bgRef.current, {
-      opacity: 0,
-      ease: "power1.out",
-    });
-
-    // 2. Scale down welcome text (start AFTER background faded out)
-    tl.fromTo(textRef.current, {
-      scale: 125,
-      x: 1500
-    }, {
-      scale: 1,
-      x: 0,
-      ease: "power1.out"
-    }, "<");
-
-    // 3. Fade in header (AFTER the text)
-    tl.fromTo(headerRef.current, {
-      opacity: 0,
-    }, {
-      opacity: 1,
-      duration: 0.1
-    });
-
-    // 4. Fade in content (AFTER the header)
-    tl.fromTo(contentRef.current, {
-      opacity: 0,
-      y: 50
-    }, {
-      opacity: 1,
-      y: 0,
-      duration: 0.7
-    });
-  });
-
-  return () => ctx.revert();
-}, []);
+    return () => ctx.revert();
+  }, []);
 
   return (
     <>
-      <main className="w-full bg-gradient-to-br bg-gradient-to-tr from-[#1e1b4b] via-[#1e293b] to-[#0f172a]">
+      <main className="w-full bg-gradient-to-br from-[#1e1b4b] via-[#1e293b] to-[#0f172a]">
         {/* All-in-One Pinned Section */}
         <Header ref={headerRef} />
         <section

@@ -16,7 +16,7 @@ const About: React.FC<SectionProps> = ({ id }) => {
               <a href="https://github.com/MattiaGuggi"
               target="_blank"
               rel="noopener"
-              className="transition-all duration-400 hover:scale-105 px-6 py-2 rounded bg-indigo-700 text-white font-semibold hover:bg-indigo-800"
+              className="transition-all duration-400 hover:scale-105 px-6 py-2 rounded bg-indigo-800 text-white font-semibold hover:bg-indigo-900"
             >
               GitHub
             </a>

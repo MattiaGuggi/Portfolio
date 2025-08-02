@@ -2,7 +2,6 @@ import { useRef, useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import React from "react";
 import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
@@ -38,7 +37,7 @@ const Header = ({ ref }: MyComponentProps) => {
     handleResize(); // Initial check
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [window.innerWidth]);
 
   // Animate mobile dropdown
   useEffect(() => {
