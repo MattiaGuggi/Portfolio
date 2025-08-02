@@ -74,15 +74,15 @@ const Header = ({ ref }: MyComponentProps) => {
   return (
     <header
       ref={ref}
-      className="
+      className={`
         fixed top-0 px-8 py-6 flex items-center justify-between
-        bg-white/80 backdrop-blur border-b border-indigo-200
+        bg-white/80 backdrop-blur
         shadow-lg z-50 w-full
         transition-shadow transition-colors duration-300
         hover:shadow-xl
         hover:bg-white/95
-        rounded-b-lg
-      "
+        ${isOpen ? '' : 'rounded-b-lg'}
+      `}
     >
       <span
         className="
@@ -138,7 +138,7 @@ const Header = ({ ref }: MyComponentProps) => {
           <nav
             ref={dropdownRef}
             className="
-              absolute top-full left-0 w-full bg-white shadow-md
+              absolute top-full left-0 w-full bg-white/80 shadow-md
               flex-col items-start px-8 py-6 gap-6 text-indigo-700 md:hidden
               overflow-hidden
               rounded-b-lg
@@ -153,7 +153,7 @@ const Header = ({ ref }: MyComponentProps) => {
                 className="
                   font-semibold text-lg w-full
                   cursor-pointer
-                  hover:text-indigo-600
+                  text-indigo-800 hover:text-indigo-900
                   transition-colors duration-300
                   select-none
                 "
