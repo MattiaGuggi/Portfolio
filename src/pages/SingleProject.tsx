@@ -21,6 +21,7 @@ const SingleProject = () => {
   ];
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const overlay = overlayRef.current;
 
     if (!overlay) return;

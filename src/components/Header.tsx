@@ -18,6 +18,7 @@ const Header = ({ ref }: MyComponentProps) => {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, type: string) => {
     e.preventDefault();
+    setIsOpen(false);
     setTimeout(() => {
       const section = document.getElementById(type);
       if (section) {
@@ -78,7 +79,7 @@ const Header = ({ ref }: MyComponentProps) => {
         fixed top-0 px-8 py-6 flex items-center justify-between
         bg-white/80 backdrop-blur
         shadow-lg z-50 w-full
-        transition-shadow transition-colors duration-300
+        transition-all duration-300
         hover:shadow-xl
         hover:bg-white/95
         ${isOpen ? '' : 'rounded-b-lg'}

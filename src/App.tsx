@@ -34,12 +34,12 @@ const MainPage = () => {
 
   return (
     <>
-        <Home id="home" />
-        <Projects id="projects" />
-        <Tech id="tech" />
-        <About id="about" />
-        <Contact id="contact" />
-        <Footer />
+      <Home id="home" />
+      <Projects id="projects" />
+      <Tech id="tech" />
+      <About id="about" />
+      <Contact id="contact" />
+      <Footer />
     </>
   )
 };
@@ -80,7 +80,6 @@ function App() {
     <BrowserRouter>
       <main className="flex flex-col min-h-screen w-full bg-gradient-to-br from-[#0a0c23] to-[#0b1120]" id="mainPage">
         <Routes>
-          <Route path='*' element={<MainPage />} />
           <Route path='/' element={<MainPage />} />
           <Route path='/projects/:title' element={<SingleProject />} />
         </Routes>

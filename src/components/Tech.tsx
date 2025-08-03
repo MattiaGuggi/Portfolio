@@ -34,7 +34,6 @@ const Tech: React.FC<SectionProps> = ({ id }) => {
     return 2; // lg
   };
 
-  
   useEffect(() => {
     const handleResize = () => {
       setRows(2);
@@ -46,6 +45,7 @@ const Tech: React.FC<SectionProps> = ({ id }) => {
   }, []);
 
   useEffect(() => {
+  const ctx = gsap.context(() => {
     const icons = gsap.utils.toArray<HTMLElement>("#techContainer div");
     const line = centralLineRef.current;
     const verticalLines = verticalLinesRef.current;
@@ -54,11 +54,11 @@ const Tech: React.FC<SectionProps> = ({ id }) => {
 
     const lineLength = line.getTotalLength();
 
-    icons.forEach(icon => {
+    icons.forEach((icon) => {
       gsap.set(icon, {
         opacity: 0,
         y: 50,
-        scale: 0.8
+        scale: 0.8,
       });
     });
 
@@ -69,56 +69,63 @@ const Tech: React.FC<SectionProps> = ({ id }) => {
 
     const timeline = gsap.timeline({
       scrollTrigger: {
-        trigger: "#tech",
+        trigger: containerRef.current,
         start: "center center",
         end: "+=1000 center",
         scrub: true,
         pin: true,
         markers: true,
-      }
+      },
     });
 
-    // Animate the main horizontal line
     timeline.to(line, {
       strokeDashoffset: 0,
       ease: "none",
     });
 
-    // Animate each vertical line outward from center (y=200)
     verticalLines.forEach((vLine, i) => {
       const rowIndex = i % rows;
       const rowSpacing = 180 / (rows - 1);
       const yTarget = 80 + rowSpacing * rowIndex;
 
-      timeline.to(vLine, {
-        attr: {
-          y1: yTarget, // Decide whether to grow upward or downward
+      timeline.to(
+        vLine,
+        {
+          attr: {
+            y1: yTarget,
+          },
+          ease: "power1.out",
+          duration: 0.3,
         },
-        ease: "power1.out",
-        duration: 0.3,
-      }, "<+" + i * 0.03); // slightly staggered
+        "<+" + i * 0.03
+      );
     });
 
-    // Animate icons
-    timeline.to(icons, {
-      stagger: 0.05,
-      opacity: 1,
-      scale: 1,
-      y: 0,
-    }, "<");
+    timeline.to(
+      icons,
+      {
+        stagger: 0.05,
+        opacity: 1,
+        scale: 1,
+        y: 0,
+      },
+      "<"
+    );
+  }, containerRef);
 
-  }, [rows]);
+  return () => ctx.revert();
+}, [rows]);
 
   return (
     <section
-      id={id}
+      id={id} ref={containerRef}
       className="min-h-[60vh] w-full flex flex-col items-center justify-center py-10 px-4 sm:px-10 mt-20 mb-[1000px]"
     >
       <h1 className="text-4xl font-bold text-indigo-800 text-center mb-12">
         Tech I Use
       </h1>
 
-      <div className="relative w-full max-w-6xl h-[400px] mb-32" ref={containerRef}>
+      <div className="relative w-full max-w-6xl h-[400px] mb-32">
         {/* Bus line and vertical connectors */}
         <svg
           className="absolute top-0 left-0 w-full h-full pointer-events-none"

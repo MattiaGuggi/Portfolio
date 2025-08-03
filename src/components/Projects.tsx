@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -9,6 +10,7 @@ type SectionProps = {
 };
 
 const Projects: React.FC<SectionProps> = ({ id }) => {
+  const navigate = useNavigate();
   const overlayRef = useRef<HTMLDivElement>(null);
 
   const projects: [string, string, string[]][] = [
@@ -29,16 +31,17 @@ const Projects: React.FC<SectionProps> = ({ id }) => {
 
     const tl = gsap.timeline({
       onComplete: () => {
+        // This avoids a full page reload
         window.location.href = `/projects/${title}`;
       }
     });
 
     tl.set(overlay, { y: "100%", opacity: 1 }) // Start off-screen (bottom)
-    .to(overlay, {
-      y: "0%",
-      duration: 0.5,
-      ease: "power2.inOut",
-    })
+      .to(overlay, {
+        y: "0%",
+        duration: 0.5,
+        ease: "power2.inOut",
+      });
   };
 
   useEffect(() => {
