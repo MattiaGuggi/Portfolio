@@ -7,11 +7,7 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-type MyComponentProps = {
-  ref: React.Ref<HTMLElement>;
-};
-
-const Header = ({ ref }: MyComponentProps) => {
+const Header = ({ ref }: { ref: React.Ref<HTMLElement> }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -77,12 +73,12 @@ const Header = ({ ref }: MyComponentProps) => {
       ref={ref}
       className={`
         fixed top-0 px-8 py-6 flex items-center justify-between
-        bg-white/80 backdrop-blur
-        shadow-lg z-50 w-full
+        
+        z-50 w-full
         transition-all duration-300
         hover:shadow-xl
         hover:bg-white/95
-        ${isOpen ? '' : 'rounded-b-lg'}
+        ${isOpen ? 'bg-white' : 'rounded-b-lg backdrop-blur bg-white/80'}
       `}
     >
       <span
@@ -138,12 +134,11 @@ const Header = ({ ref }: MyComponentProps) => {
 
           <nav
             ref={dropdownRef}
-            className="
-              absolute top-full left-0 w-full bg-white/80 shadow-md
+            className={`
+              absolute top-full left-0 w-full shadow-md
               flex-col items-start px-8 py-6 gap-6 text-indigo-700 md:hidden
-              overflow-hidden
-              rounded-b-lg
-            "
+              overflow-hidden ${isOpen ? 'bg-white' : 'bg-white/80'}
+              rounded-b-lg`}
             style={{ display: "none" }}
           >
             {["home", "projects", "map", "about", "contact"].map((id) => (

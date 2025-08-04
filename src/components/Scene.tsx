@@ -22,20 +22,18 @@ const AnimatedModel = () => {
     scrollTrigger: {
       trigger: "#about",
       start: "center center",
-      end: "+=1000 center",
+      end: "+=500 center",
       scrub: true,
-      pin: true,
       markers: true,
     },
   });
 
   tl.to(groupRef.current.position, {
-    x: -2,
-    ease: "power2.out",
+    x: -1,
+    y: -1
   })
   .to(groupRef.current.rotation, {
     y: Math.PI,
-    ease: "power2.out",
   },"<");
 
   return () => {

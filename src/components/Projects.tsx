@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,7 +9,6 @@ type SectionProps = {
 };
 
 const Projects: React.FC<SectionProps> = ({ id }) => {
-  const navigate = useNavigate();
   const overlayRef = useRef<HTMLDivElement>(null);
 
   const projects: [string, string, string[]][] = [
