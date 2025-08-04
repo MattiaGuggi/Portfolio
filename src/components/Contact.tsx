@@ -45,7 +45,7 @@ const Contact: React.FC<SectionProps> = ({ id }) => {
   }, []);
 
   return (
-    <section id={id} className="min-h-[40vh] flex flex-col items-center justify-center px-14 xs:px-4 py-10">
+    <section id={id} className="min-h-[40vh] flex flex-col items-center justify-center px-14 xs:px-4 py-10 my-10">
       <div className="flex w-full px-4 xs:flex-col sm:flex-col xs:px-0 md:flex-row gap-20">
         {/* Map and Form each take 50% in md+ screens */}
         <div className="xs:w-full sm:w-full w-1/2 lg:w-1/2">
