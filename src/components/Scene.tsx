@@ -21,15 +21,18 @@ const AnimatedModel = () => {
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: "#about",
-      start: "center center",
-      end: "+=500 center",
+      start: "center-=200 center",
+      end: "bottom-=200 center",
       scrub: true,
       markers: true,
     },
   });
 
-  tl.to(groupRef.current.position, {
-    x: -1,
+  tl.fromTo(groupRef.current.position, {
+    x: 1.3,
+    y: 0
+  }, {
+    x: -1.25,
     y: -1
   })
   .to(groupRef.current.rotation, {

@@ -11,6 +11,7 @@ type SectionProps = {
 };
 
 const Home: React.FC<SectionProps> = ({ id }) => {
+  const videoRef = useRef(null);
   const wrapperRef = useRef(null);
   const bgRef = useRef(null);
   const textRef = useRef(null);

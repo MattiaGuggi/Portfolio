@@ -8,7 +8,7 @@ type SectionProps = {
 const About: React.FC<SectionProps> = ({ id }) => {
   return (
     <>
-      <section id={id} className="min-h-[40vh] flex flex-col items-center justify-center px-14 xs:px-4 py-10 bg-gradient-to-br from-indigo-300 to-indigo-500 h-[1800px]">
+      <section id={id} className="flex flex-col items-center justify-start px-14 xs:px-4 py-10 bg-gradient-to-br from-indigo-300 to-indigo-500 h-[1500px]">
         <div className="max-w-2xl mx-auto text-center my-7 h-[1000px] flex flex-col justify-start items-center gap-10">
           <h2 className="text-3xl font-bold text-indigo-700 mb-4">About Me</h2>
           <p className="text-white/80 mb-8">Hi, I'm Mattia Guggi, a passionate developer focused on building efficient, modern, and minimalistic web applications. I love working with Next.js, React, and Python to create impactful digital experiences.</p>
