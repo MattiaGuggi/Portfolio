@@ -1,55 +1,11 @@
-import React, { useRef, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Environment, Html, useProgress } from '@react-three/drei'
-import gsap from 'gsap'
-import ScrollTrigger from 'gsap/ScrollTrigger'
-import MartialArtistModel from './MartiaArtistModel'
-
-gsap.registerPlugin(ScrollTrigger)
+import AnimatedModel from './AnimatedModel'
+import React from 'react'
 
 function Loader() {
   const { progress } = useProgress()
   return <Html className="absolute" center>Loading {progress.toFixed(0)}%</Html>
-}
-
-const AnimatedModel = () => {
-  const groupRef = useRef<any>(null)
-
-  useEffect(() => {
-  if (!groupRef.current) return;
-
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#about",
-      start: "center-=200 center",
-      end: "bottom-=200 center",
-      scrub: true,
-      markers: true,
-    },
-  });
-
-  tl.fromTo(groupRef.current.position, {
-    x: 1.3,
-    y: 0
-  }, {
-    x: -1.25,
-    y: -1
-  })
-  .to(groupRef.current.rotation, {
-    y: Math.PI,
-  },"<");
-
-  return () => {
-    tl.kill();
-  };
-}, []);
-
-
-  return (
-    <group ref={groupRef} position={[2, 0, 0]} rotation={[0, 0, 0]}>
-      <MartialArtistModel scale={0.35} />
-    </group>
-  )
 }
 
 const Scene: React.FC = () => {
