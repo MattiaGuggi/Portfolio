@@ -3,14 +3,22 @@ import Footer from "../components/Footer";
 import { MoveLeft } from "lucide-react";
 import gsap from 'gsap'
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type ReactElement } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
+
+type projectType = {
+  name: string,
+  description: ReactElement | string,
+  icons: string[]
+
+};
 
 const SingleProject = () => {
   const { title } = useParams();
   const navigate = useNavigate();
   const overlayRef = useRef<HTMLDivElement>(null);
+
   const icons = [
     {image:"https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg", name: "Typescript"},
     {image:"https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original-wordmark.svg", name: "Next.js"},
@@ -18,6 +26,46 @@ const SingleProject = () => {
     {image:"https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original-wordmark.svg", name: "Express"},
     {image:"https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg", name: "React"},
     {image:"https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original-wordmark.svg", name: "Node.js"},
+  ];
+  const projects: projectType[] = [
+    {
+      name: 'Spotify Dashboard',
+      description: '',
+      icons: []
+    },
+    {
+      name: 'Bar Service',
+      description: <p className="text-lg text-white/80 max-w-2xl mb-8 text-center">
+          A React project based on an API that lets users search for <span className='text-indigo-700 font-semibold'>drinks</span> and 
+          <span className='text-indigo-700 font-semibold'> cocktails</span>, aswell as <span className='text-indigo-700 font-semibold'>create new drinks </span> 
+          with custom photos and names
+        </p>,
+      icons: []
+    }, {
+      name: 'FantaBalzo',
+      description: '',
+      icons: []
+    }, {
+      name: 'Project Volta',
+      description: '',
+      icons: []
+    }, {
+      name: 'Polls App',
+      description: '',
+      icons: []
+    }, {
+      name: 'Closet App',
+      description: '',
+      icons: []
+    }, {
+      name: 'Air bnb',
+      description: '',
+      icons: []
+    }, {
+      name: 'Text Summarization App',
+      description: '',
+      icons: []
+    }
   ];
 
   useEffect(() => {
@@ -77,10 +125,8 @@ const SingleProject = () => {
         <MoveLeft onClick={() => navigate('/#projects')} className="cursor-pointer duration-400 transition-all scale-125 hover:scale-150 text-indigo-600 relative" />
         <h1 className="font-bold text-5xl xs:text-4xl text-transparent bg-clip-text bg-gradient-to-br from-indigo-300 via-indigo-500 to-indigo-900 leading-snug mb-6">{title}</h1>
         <p className="text-lg text-white/80 max-w-2xl mb-8 text-center">
-          A React project based on an API that lets users search for <span className='text-indigo-700 font-semibold'>drinks</span> and 
-          <span className='text-indigo-700 font-semibold'> cocktails</span>, aswell as <span className='text-indigo-700 font-semibold'>create new drinks </span> 
-          with custom photos and names
-          </p>
+          {projects.map(project => project.name == title ? project.description : '')}
+        </p>
         <div className="w-full flex flex-col items-center justify-center py-10 xs:px-4 px-14 text-center mx-auto h-full">
           <div className="flex flex-col h-full w-full items-center">
             <h1 className="text-3xl font-bold text-indigo-800 py-5">Demo</h1>

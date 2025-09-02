@@ -15,10 +15,10 @@ const Projects: React.FC<SectionProps> = ({ id }) => {
     ["Spotify Dashboard", "A React dashboard for my personal Spotify analytics and organization based on a python server.", ["./vite.svg", "./vite.svg", "./vite.svg", "./vite.svg", "./vite.svg", "./vite.svg", "./vite.svg", "./vite.svg"]],
     ["Bar Service", "A React App to see all cocktails and create new ones.", ["/vite.svg"]],
     ["FantaBalzo", "A fantasy game for bids on whoever would skip school tests.", ["/vite.svg"]],
-    ["Polls App", "A Next.js-based app to let users play/create polls.", ["/vite.svg"]],
     ["Project Volta", "A Django-based virtual museum platform for and cultural institutions.", ["/vite.svg"]],
-    ["Voice Recognition App", "AI-powered voice recognition using Python and dlib.", ["/vite.svg"]],
-    ["Face Recognition App", "AI-powered face recognition using Python and dlib.", ["/vite.svg"]],
+    ["Polls App", "A Next.js-based app to let users play/create polls.", ["/vite.svg"]],
+    ["Closet App", "Next.js-based app to let users load clothing items and create outfits.", ["/vite.svg"]],
+    ["Air bnb", "Next.js-based app to let hosts manage their houses and change easily any detail.", ["/vite.svg"]],
     ["Text Summarization App", "AI-powered text summarization using Python.", ["/vite.svg"]],
   ];
 
